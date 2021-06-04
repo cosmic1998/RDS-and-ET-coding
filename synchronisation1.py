@@ -18,8 +18,9 @@ camera = Camera(figure)
 
 #Get orbit of points
 x_0 = get_orbit(0.3,0.1,0.08,150)
-y_0 = get_orbit(0.5,0.1,0.08,150)
-
+y_0 = get_orbit(0.8,0.1,0.08,150)
+print(x_0)
+dists = np.abs(x_0-y_0)
 #Animate points
 for i in range(len(x_0)):
     axes.plot(x_coord, y_coord,c='black')
@@ -31,3 +32,9 @@ for i in range(len(x_0)):
 #Save as gif
 anim = camera.animate(blit=True)
 anim.save('sync.gif',writer='pillow')
+plt.clf()
+new_fig = plt.subplots(1)
+plt.scatter(range(len(dists)),dists)
+plt.yscale('log')
+plt.title("Distance between the points $x,y$ thought of as points in [0,1)")
+plt.show()
